@@ -1,12 +1,12 @@
 version: 2.1
 
 jobs:
-  parameters:
-    size:
-      type: integer
-      default: 15
   foo:
     # concurrency limit at 30
+    parameters:
+      size:
+        type: integer
+        default: 15
     parallelism: << parameters.size >>
     docker:
       - image: cimg/base:stable
