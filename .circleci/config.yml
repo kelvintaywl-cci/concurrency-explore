@@ -1,9 +1,13 @@
 version: 2.1
 
 jobs:
+  parameters:
+    size:
+      type: integer
+      default: 15
   foo:
     # concurrency limit at 30
-    parallelism: 31
+    parallelism: << parameters.size >>
     docker:
       - image: cimg/base:stable
     resource_class: small
@@ -16,4 +20,7 @@ jobs:
 workflows:
   main:
     jobs:
-      - foo
+      - foo:
+          size: 15
+      - foo:
+          size: 16
