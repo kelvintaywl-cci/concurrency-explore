@@ -1,0 +1,19 @@
+version: 2.1
+
+jobs:
+  foo:
+    # concurrency limit at 30
+    parallelism: 31
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - run:
+          command: sleep 10
+      - run:
+          command: echo "done for Node ${CIRCLE_NODE_INDEX} / ${CIRCLE_NODE_TOTAL}"
+
+workflows:
+  main:
+    jobs:
+      - foo
